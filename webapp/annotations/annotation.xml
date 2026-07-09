@@ -15,17 +15,57 @@
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
             <Annotations Target="NorthwindModel.Order">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>OrderID</PropertyPath>
+                    </Collection>
+                </Annotation>
                 <Annotation Term="UI.LineItem">
+                    <!-- Criticidade da LINHA inteira (cor na borda esquerda).
+                         ShipVia = 1/2/3 -> Vermelho/Amarelo/Verde (didático!) -->
+                    <Annotation Term="UI.Criticality" Path="ShipVia"/>
                     <Collection>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="OrderID"/>
-                            <PropertyValue Property="Label" String="{@i18n>ordem}"/>
                             <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="RequiredDate"/>
-                            <PropertyValue Property="Label" String="data"/>
+                            <PropertyValue Property="Value" Path="CustomerID"/>
                             <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <!-- Contato com QuickView (popup) vindo da entidade Customer -->
+                        <Record Type="UI.DataFieldForAnnotation">
+                            <PropertyValue Property="Label" String="{@i18n>contato}"/>
+                            <PropertyValue Property="Target" AnnotationPath="Customer/@Communication.Contact"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="OrderDate"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ShippedDate"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Freight"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
+                        </Record>
+                        <!-- DataPoint com barra de progresso dentro da tabela -->
+                        <Record Type="UI.DataFieldForAnnotation">
+                            <PropertyValue Property="Label" String="{@i18n>progressoFrete}"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#ProgressoFrete"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                        </Record>
+                        <!-- DataPoint com estrelas (rating) dentro da tabela -->
+                        <Record Type="UI.DataFieldForAnnotation">
+                            <PropertyValue Property="Label" String="{@i18n>avaliacao}"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Avaliacao"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ShipCountry"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -90,6 +130,10 @@
                     </Record>
                 </Annotation>
             </Annotations>
+            <!-- Colunas da tabela do List Report -->
+                
+                <!-- SemanticKey: OrderID aparece em destaque (negrito) na tabela -->
+
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>
