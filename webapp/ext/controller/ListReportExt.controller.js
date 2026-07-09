@@ -3,8 +3,9 @@ sap.ui.define([
     "sap/ui/model/Filter", 
     "sap/ui/comp/smartfilterbar/SmartFilterBar", 
     "sap/m/ComboBox",
-    "sap/ui/model/FilterOperator"
-], function (MessageBox,Filter, SmartFilterBar, ComboBox,FilterOperator) {
+    "sap/ui/model/FilterOperator",
+    "sap/m/MessageToast",
+], function (MessageBox,Filter, SmartFilterBar, ComboBox,FilterOperator,MessageToast) {
     "use strict";
     return {
         getCustomAppStateDataExtension: function (oCustomData) {
