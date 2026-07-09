@@ -40,6 +40,8 @@ sap.ui.define([
                 );
             }
         },
-
+        onPressResumo: function(oEvent) {
+            MessageToast.show("Custom handler invoked.");
+        }
     };
 });

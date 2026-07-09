@@ -106,7 +106,20 @@
             "extensions": {
                 "sap.ui.controllerExtensions": {
                     "sap.suite.ui.generic.template.ListReport.view.ListReport": {
-                        "controllerName": "orders.ext.controller.ListReportExt"
+                        "controllerName": "orders.ext.controller.ListReportExt",
+                        "sap.ui.generic.app": {
+                            "Orders": {
+                                "EntitySet": "Orders",
+                                "Actions": {
+                                    "Resumo": {
+                                        "id": "ResumoButton",
+                                        "text": "{@i18n>resumoDaSeleo}",
+                                        "press": "onPressResumo",
+                                        "requiresSelection": true
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 "sap.ui.viewExtensions": {
