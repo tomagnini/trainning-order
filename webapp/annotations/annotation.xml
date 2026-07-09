@@ -2,6 +2,12 @@
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
         <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
     </edmx:Reference>
+ <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+     <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
     <edmx:Reference Uri="/V2/Northwind/Northwind.svc/$metadata">
         <edmx:Include Namespace="NorthwindModel"/>
         <edmx:Include Namespace="ODataWeb.Northwind.Model"/>
@@ -26,6 +32,10 @@
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
                         <PropertyPath>OrderID</PropertyPath>
+                        <PropertyPath>CustomerID</PropertyPath>
+                        <PropertyPath>OrderDate</PropertyPath>
+                        <PropertyPath>ShipCountry</PropertyPath>
+                        <PropertyPath>ShippedDate</PropertyPath>
                     </Collection>
                 </Annotation>
                 <Annotation Term="UI.FieldGroup" Qualifier="DadosGerais">
@@ -57,6 +67,27 @@
                             <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#DadosGerais"/>
                         </Record>
                     </Collection>
+                </Annotation>
+            </Annotations>
+             <!-- ============================================================ -->
+            <!-- 2. ANNOTATIONS DE PROPRIEDADES (labels, texto, value help)    -->
+            <!-- ============================================================ -->
+            <Annotations Target="NorthwindModel.Order/OrderID">
+                <Annotation Term="Common.Label" String="{@i18n>ordem}"/>
+            </Annotations>
+            <!-- ============================================================ -->
+            <!-- 5. CAPABILITIES: as ações CRUD (Criar/Editar/Eliminar) ficam  -->
+            <!--    ATIVAS. Só desligamos a busca livre ($search), que o       -->
+            <!--    Northwind não suporta e geraria erro na requisição.        -->
+            <!--    Obs.: o Northwind público é read-only, então gravações     -->
+            <!--    retornam erro do servidor - ótimo para demonstrar o        -->
+            <!--    tratamento de mensagens do Fiori Elements.                 -->
+            <!-- ============================================================ -->
+            <Annotations Target="ODataWeb.Northwind.Model.NorthwindEntities/Orders">
+                <Annotation Term="Capabilities.SearchRestrictions">
+                    <Record>
+                        <PropertyValue Property="Searchable" Bool="false"/>
+                    </Record>
                 </Annotation>
             </Annotations>
         </Schema>

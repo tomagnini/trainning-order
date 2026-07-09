@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" xmlns:core="sap.ui.core">
+    <smartfilterbar:ControlConfiguration groupId="_BASIC" 
+        key="PaisCustom"
+        label="{@i18n>pasextenso}"
+        visibleInAdvancedArea="true">
+        <smartfilterbar:customControl>
+            <ComboBox id="cbPaisCustom">
+            <core:Item key="Brazil" text="Brazil"/>
+            <core:Item key="France" text="France"/>
+            <core:Item key="Italy" text="Italy"/>
+        </ComboBox>
+        </smartfilterbar:customControl>
+    </smartfilterbar:ControlConfiguration>
+</core:FragmentDefinition>
