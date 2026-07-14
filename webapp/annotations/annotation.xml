@@ -1,4 +1,7 @@
 <edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
         <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
     </edmx:Reference>
@@ -94,6 +97,9 @@
                                 <Record Type="UI.DataField">
                                     <PropertyValue Property="Value" Path="EmployeeID"/>
                                 </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="Customer/CompanyName"/>
+                                </Record>
                             </Collection>
                         </PropertyValue>
                         <PropertyValue Property="Label" String="{@i18n>dadosGerais}"/>
@@ -105,6 +111,16 @@
                             <PropertyValue Property="Label" String="{@i18n>dadosGerais}"/>
                             <PropertyValue Property="ID" String="dadosgerais"/>
                             <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#DadosGerais"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="DadosGerais"/>
+                            <PropertyValue Property="ID" String="dadosgerais2"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#DadosGerais"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="Order_Details/@UI.LineItem"/>
+                            <PropertyValue Property="Label" String="Itens"/>
+                            <PropertyValue Property="ID" String="Itens"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -134,6 +150,22 @@
                 
                 <!-- SemanticKey: OrderID aparece em destaque (negrito) na tabela -->
 
+            <Annotations Target="NorthwindModel.Order_Detail">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ProductID"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="UnitPrice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Quantity"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
         </Schema>
     </edmx:DataServices>
 </edmx:Edmx>
